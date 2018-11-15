@@ -2,16 +2,16 @@ package com.bytecake.raml2markdown.markdowngenerator;
 
 import net.steppschuh.markdowngenerator.table.Table;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.datamodel.TypeDeclaration;
-import org.raml.v2.api.model.v10.methods.Method;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class MethodHeaderMarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(MethodHeaderMarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(MethodHeaderMarkdownGenerator.class);
 
     public static void generateHeadersMarkdown(BufferedWriter bufferedWriter, List<TypeDeclaration> headerList, int level) throws IOException {
         logger.info("Generating Headers Markdown");

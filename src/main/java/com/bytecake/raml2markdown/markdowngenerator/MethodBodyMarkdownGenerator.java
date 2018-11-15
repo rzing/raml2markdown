@@ -3,19 +3,20 @@ package com.bytecake.raml2markdown.markdowngenerator;
 import net.steppschuh.markdowngenerator.table.Table;
 import net.steppschuh.markdowngenerator.text.code.CodeBlock;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.datamodel.ExampleSpec;
 import org.raml.v2.api.model.v10.datamodel.ObjectTypeDeclaration;
 import org.raml.v2.api.model.v10.datamodel.TypeDeclaration;
 import org.raml.v2.api.model.v10.declarations.AnnotationRef;
 import org.raml.v2.api.model.v10.system.types.MarkdownString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class MethodBodyMarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(MethodBodyMarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(MethodBodyMarkdownGenerator.class);
 
     public static void generateBodyMarkdown(BufferedWriter bufferedWriter, List<TypeDeclaration> body, int level) throws IOException {
         logger.info("Generating Body Markdown");

@@ -1,19 +1,20 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.bodies.Response;
 import org.raml.v2.api.model.v10.datamodel.TypeDeclaration;
 import org.raml.v2.api.model.v10.methods.Method;
 import org.raml.v2.api.model.v10.system.types.MarkdownString;
 import org.raml.v2.api.model.v10.system.types.StatusCodeString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class MethodResponseMarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(MethodResponseMarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(MethodResponseMarkdownGenerator.class);
 
     public static void generateResponseMarkdown(BufferedWriter bufferedWriter, Method method) throws IOException {
         logger.info("Generating Method Response Markdown");

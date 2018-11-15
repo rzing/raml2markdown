@@ -1,11 +1,12 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
+import com.bytecake.raml2markdown.ProcessingException;
 import net.steppschuh.markdowngenerator.rule.HorizontalRule;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.commons.text.StringEscapeUtils;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.api.Api;
 import org.raml.v2.api.model.v10.declarations.AnnotationRef;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,11 +17,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public abstract class MarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(MarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(MarkdownGenerator.class);
 
     protected final String fileExtension = ".md";
     protected final Api ramlModelApi;
-    protected final String outputFolderPath;
+    protected String outputFolderPath;
     protected final String apiName;
     protected final String apiType;
     protected final boolean isDraft;
@@ -34,7 +35,7 @@ public abstract class MarkdownGenerator {
         this.isDraft = isDraft;
     }
 
-    public abstract void generate() throws IOException;
+    public abstract void generate() throws IOException, ProcessingException;
 
     protected String createMarkdownFileHeader(String title) {
         logger.info("Creating Markdown File Header for Title: " + title);

@@ -1,7 +1,6 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.api.Api;
 import org.raml.v2.api.model.v10.datamodel.TypeDeclaration;
 import org.raml.v2.api.model.v10.declarations.AnnotationRef;
@@ -10,15 +9,18 @@ import org.raml.v2.api.model.v10.methods.TraitRef;
 import org.raml.v2.api.model.v10.security.SecuritySchemeRef;
 import org.raml.v2.api.model.v10.system.types.AnnotableStringType;
 import org.raml.v2.api.model.v10.system.types.MarkdownString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class MethodMarkdownGenerator extends MarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(MethodMarkdownGenerator.class);
-    private Method method;
-    private String resourceTitle;
+    private final static Logger logger = LoggerFactory.getLogger(MethodMarkdownGenerator.class);
+
+    private final Method method;
+    private final String resourceTitle;
     private final String resourceUri;
 
     public MethodMarkdownGenerator(Api ramlModelApi, String outputFolderPath, String apiName, String apiType, boolean isDraft,

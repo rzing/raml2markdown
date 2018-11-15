@@ -1,15 +1,15 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
 import net.steppschuh.markdowngenerator.table.Table;
-import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.api.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 
 public class ApiInstancesMarkdownGenerator extends MarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(ApiInstancesMarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(ApiInstancesMarkdownGenerator.class);
 
     private final String fileName = "apiinstances";
     private final String title = "API Instances";

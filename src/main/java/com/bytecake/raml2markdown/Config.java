@@ -1,25 +1,32 @@
 package com.bytecake.raml2markdown;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
-    public static final String CONFIG_FILE_NAME = "config.properties";
+    private final static Logger logger = LoggerFactory.getLogger(Config.class);
+
+    // public static final String CONFIG_FILE_NAME = "config.properties";
     private static Config config = null;
     private static Properties properties = null;
 
-    private Config() throws IOException {
+    private Config(String fileName) throws IOException {
         if(properties == null) {
             properties = new Properties();
-            properties.load(new FileInputStream(CONFIG_FILE_NAME));
+            properties.load(new FileInputStream(fileName));
         }
     }
 
-    public static Config getConfig() throws IOException {
-        if(config == null) {
-            config = new Config();
-        }
+    public static Config loadConfig(String fileName) throws IOException {
+        config = new Config(fileName);
+        return config;
+    }
+
+    public static Config getConfig() {
         return config;
     }
 
@@ -27,24 +34,24 @@ public class Config {
         return properties;
     }
 
-    public static String setProperty(String key, String value) throws IOException {
+    public static String setProperty(String key, String value) {
         return getConfig().getProperties().setProperty(key, value).toString();
     }
 
-    public static String getProperty(String key) throws IOException {
+    public static String getProperty(String key) {
         return getConfig().getProperties().getProperty(key);
     }
 
-    public static Boolean getBooleanProperty(String key) throws IOException {
+    public static Boolean getBooleanProperty(String key) {
         String booleanValueString = getProperty(key);
         return Boolean.valueOf(booleanValueString);
     }
 
-    public static String getProperty(String key, String defaultValue) throws IOException {
+    public static String getProperty(String key, String defaultValue) {
         return getConfig().getProperties().getProperty(key, defaultValue);
     }
 
-    public static Boolean getBooleanProperty(String key, Boolean defaultValue) throws IOException {
+    public static Boolean getBooleanProperty(String key, Boolean defaultValue) {
         String booleanValueString = getProperty(key, defaultValue.toString());
         return Boolean.valueOf(booleanValueString);
     }

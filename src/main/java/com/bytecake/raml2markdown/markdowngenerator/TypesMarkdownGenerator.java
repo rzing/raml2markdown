@@ -1,16 +1,19 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
 import net.steppschuh.markdowngenerator.text.heading.Heading;
-import org.apache.log4j.Logger;
 import org.raml.v2.api.model.v10.api.Api;
 import org.raml.v2.api.model.v10.datamodel.TypeDeclaration;
+import org.raml.v2.api.model.v10.system.types.AnnotableStringType;
+import org.raml.v2.api.model.v10.system.types.MarkdownString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class TypesMarkdownGenerator extends MarkdownGenerator {
-    private final static Logger logger = Logger.getLogger(TypesMarkdownGenerator.class);
+    private final static Logger logger = LoggerFactory.getLogger(TypesMarkdownGenerator.class);
 
     private final String fileName = "types";
     private final String title = "Types";
@@ -30,10 +33,20 @@ public class TypesMarkdownGenerator extends MarkdownGenerator {
         List<TypeDeclaration> types = ramlModelApi.types();
         for (TypeDeclaration type : types) {
             String nameValue = type.name();
-            String displayNameValue = type.displayName().value();
-            String typeValue = type.type();
-            String descriptionValue = type.description().value();
 
+            AnnotableStringType displayName = type.displayName();
+            String displayNameValue = "";
+            if(displayName != null) {
+                displayNameValue = displayName.value();
+            }
+
+            String typeValue = type.type();
+
+            MarkdownString description = type.description();
+            String descriptionValue = "";
+            if(description != null) {
+                descriptionValue = description.value();
+            }
 
             generateIndividualTypeMarkdownFile(nameValue, displayNameValue, descriptionValue, typeValue);
 

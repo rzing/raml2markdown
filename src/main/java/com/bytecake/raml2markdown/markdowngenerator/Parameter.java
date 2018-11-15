@@ -1,6 +1,11 @@
 package com.bytecake.raml2markdown.markdowngenerator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Parameter {
+    private final static Logger logger = LoggerFactory.getLogger(Parameter.class);
+
     private String parameter;
     private String description;
 

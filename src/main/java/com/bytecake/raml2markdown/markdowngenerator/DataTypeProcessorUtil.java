@@ -5,11 +5,15 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.raml.v2.api.model.v10.datamodel.*;
 import org.raml.v2.api.model.v10.declarations.AnnotationRef;
 import org.raml.v2.api.model.v10.system.types.MarkdownString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataTypeProcessorUtil {
+    private final static Logger logger = LoggerFactory.getLogger(DataTypeProcessorUtil.class);
+
     public static void processObjectProperties(Table.Builder tableBuilder, String parentObjectName,
                                                List<TypeDeclaration> propertyList, boolean generateFullyQualifieName) {
         for (TypeDeclaration property : propertyList) {
